@@ -25,7 +25,26 @@
       <hr>
       <div class="span-18 colborder">
         <h2>About this page</h2>
-        <p>This is a default page provided when you install QGIS Web Client. The default installation assumes that you checkout the QGIS Web Client from <a href="https://github.com/qgis/qgis-web-client/">github</a> into the directory "/home/web/qgis-web-client". To start with the client configuration, please copy one of the "site/js/GlobalOptions.js.templ" template files into "site/js/GlobalOptions.js". If you use different paths, please adjust them accordingly on this landing page (site/index.html) and in the file "site/js/GlobalOptions.js". You will also have to install QGIS Server (FCGI) and Apache with the FCGID module. You will have to configure Apache for FCGI use any your document locations.</p>
+			<p>
+			This is a default page provided when you install QGIS Web Client. 
+			The default installation assumes that you checkout the QGIS Web Client from <a href="https://github.com/qgis/qgis-web-client/">github</a> into the directory "/home/web/qgis-web-client". 
+			To start with the client configuration, please copy one of the "site/js/GlobalOptions.js.templ" template files into "site/js/GlobalOptions.js". 
+			If you use different paths, please adjust them accordingly on this landing page (site/index.html) and in the file "site/js/GlobalOptions.js". 
+			You will also have to install QGIS Server (FCGI) and Apache with the FCGID module. You will have to configure Apache for FCGI use any your document locations.
+			</p>
+			<h3>Our Changes</h3>
+			<p>
+			Our change on the QGIS web client are:
+			<ul>
+				<li>sql tables</li>
+				<li>php scripts for analyzing trips and merging trips</li>
+				<li>extra toolbar to the left of the map to select routes</li>
+				<li>extra buttons on top of the map for additional functions</li>
+				<li>upload of project files</li>
+				<li>display of uploaded project files</li>
+				<li>and many many more...</li>
+			</ul>
+			</p>
         <h2>Your local maps</h2>
         <div>
           <ul class="map-list">

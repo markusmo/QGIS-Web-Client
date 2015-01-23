@@ -65,6 +65,17 @@ function customBeforeMapInit() {
 
 // called after map initialization
 function customAfterMapInit() {
+   
+   	var map =  geoExtMap.map;
+	
+	var bounds = new OpenLayers.Bounds();
+	bounds.extend(new OpenLayers.LonLat(1083950.9601639,5930094.1405287));
+	bounds.extend(new OpenLayers.LonLat(1162781.1149844,6025449.4485843));
+
+	map.zoomToExtent(bounds);
+
+
+
 	routesTree = Ext.getCmp('RoutesTreePanel');
 		
 	var routes = [];
@@ -111,7 +122,7 @@ function customAfterMapInit() {
 										return;
 									}
 									
-									console.log(vs.values.length + " " + vs.id);
+									//console.log(vs.values.length + " " + vs.id);
 									
 									var r = routes[vs.id];
 									
@@ -142,8 +153,6 @@ function customAfterMapInit() {
 	
 	routesTree.checkedLeafs = [];
 	
-
-
 	routesChangeFunction = function () {
 		routesTree.root.childNodes.forEach(function(a){
 			a.childNodes.forEach(
@@ -155,14 +164,14 @@ function customAfterMapInit() {
 						   success: function(response, opts) {
 						   
 						   
-								console.log("got the route");
-								console.log(response);
+							//	console.log("got the route");
+							//	console.log(response);
 							var trip = Ext.util.JSON.decode(response.responseText);
 								
-								console.log(response.responseText);
-								console.log(trip);
+							//	console.log(response.responseText);
+							//	console.log(trip);
 								var myTrip = [];
-							
+			
 								// punkt
 								for( var k = 0; k < trip.values.length; k++){
 									var point = trip.values[k];
@@ -175,8 +184,8 @@ function customAfterMapInit() {
 									new OpenLayers.Projection("EPSG:900913")
 								);
 
-								var color = '#ff0000';
-
+								var color = '#ff0000';;
+									
 								var feature = new OpenLayers.Feature.Vector(geom);
 								feature.style = {
 									strokeWidth: 2,
@@ -199,11 +208,11 @@ function customAfterMapInit() {
 						Ext.Ajax.request({
 							url: 'analyzedTripsData.php?analyzedTripId='+n.layer.analyzedTripId,
 							success: function(response, opts){ 
-								console.log("got an analysed trip");
+								//console.log("got an analysed trip");
 								var trip = Ext.util.JSON.decode(response.responseText);
 								
-								console.log(response.responseText);
-								console.log(trip);
+								//console.log(response.responseText);
+								//console.log(trip);
 								var myTrip = [];
 							
 								// punkt
@@ -218,12 +227,20 @@ function customAfterMapInit() {
 									new OpenLayers.Projection("EPSG:900913")
 								);
 
-								var color = '#0000ff';
+								var color = '#0000ff'; // railway
 								
-								if(trip.values[0] == 'bus'){ 
-									'#00ff00';
+								//console.log(trip.values[0].type);
+								if(trip.values[0].type == 'bus'){ 
+									color ='#00ff00';
+								}
+								else if(trip.values[0].type == 'walk'){ 
+									color ='#000ff0';
+								}
+								else if(trip.values[0].type == 'car'){ 
+									color ='#0ff000';
 								}
 								
+								//console.log(color);
 								var feature = new OpenLayers.Feature.Vector(geom);
 								feature.style = {
 									strokeWidth: 5,
@@ -248,8 +265,8 @@ function customAfterMapInit() {
 	routesTree.addListener('leafschange', routesChangeFunction);
 	
 	routesTree.addListener('click', function(node,event){
-		console.log("Clicking");
-		console.log(node);
+		//console.log("Clicking");
+		//console.log(node);
 		
 		//TODO das wollte florian
 	});	
@@ -257,7 +274,7 @@ function customAfterMapInit() {
 
 // called when DOM is ready (Ext.onReady in WebgisInit.js)
 function customPostLoading() {
-   // Ext.get("panel_header").addClass('sogis-header').insertHtml('beforeEnd', '<div style="float: right; width: 250px;">hello Daniel</div>');
+   // Ext.get("panel_header").addClass('sogis-header').insertHtml('beforeEnd', '<div style="float: right; width: 250px;">hello Daniel</div>');	
 }
 
 // called when starting print
@@ -303,7 +320,7 @@ var customButtons = [
 		//allowDepress: false,
 		//toggleGroup: 'mapTools',
 		  scale: 'medium',
-		  icon: 'gis_icons/icon_chained.png',
+		  icon: 'gis_icons/icon_show_optimal.png',
 		  tooltipType: 'qtip',
 		  tooltip: "Zoom optimal",
 		  id: 'showOptimalButton',
@@ -363,20 +380,23 @@ function mergeTripsButtonClicked(){
 					});
 }
 
-
 function showOptimalButtonClicked(){
 	routesTree = Ext.getCmp('RoutesTreePanel');
-	
-	
+		
 	var left;
 	var bottom;
 	var right;
 	var top;
 	
+	var full = false;
 	routesTree.root.childNodes.forEach(function (a) {	
 		a.childNodes.forEach(
 			function (n) {
 			if (n.isLeaf() && n.attributes.checked && n.text == "Rohdaten") {	
+				if(!full){
+					full = true;
+				}
+			
 				n.layer.features[0].geometry.calculateBounds();
 				var bounds = n.layer.features[0].geometry.getBounds();
 				
@@ -403,6 +423,9 @@ function showOptimalButtonClicked(){
 		});
 	});
 	
+	if(!full){
+		return;
+	}
 	//console.log(left +" "+ bottom +" "+ top +" "+  right);
 	
 	var map =  geoExtMap.map;
@@ -412,6 +435,7 @@ function showOptimalButtonClicked(){
 	bounds.extend(new OpenLayers.LonLat(left,top));
 	bounds.extend(new OpenLayers.LonLat(right,bottom));
 
+	//console.log(bounds);
 	map.zoomToExtent(bounds);
 
 }
