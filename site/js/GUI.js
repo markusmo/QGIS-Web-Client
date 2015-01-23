@@ -195,8 +195,45 @@ MyViewportUi = Ext.extend(Ext.Viewport, {
 							height: 200,
 							border: false,
 							frame: false
-						}] // map items
-					}] // accordion items
+						},	
+						] // map items
+					},
+					
+					
+					/*
+					{
+						xtype: 'panel',
+						title: 'Routen',
+						id: 'RoutesPanel',
+						items: [*/{
+							xtype: 'treepanel',
+							id: 'RoutesTreePanel',
+							
+							
+							border: false,
+							frame: false,
+							title: 'Routen',
+							height: 159,
+							split: true,
+							region: 'center',
+							collapsible: true,
+							rootVisible: false,
+							autoScroll: true,
+							containerScroll: true,
+							cls: 'x-tree-noicon',
+							root: {
+								text: 'Root',
+								expanded: true,
+								singleClickExpand: true
+							},
+							loader: {}
+						}/*]
+					}*/
+					
+					
+					
+					
+					] // accordion items
 				}] // left panel items
 			}, {
 				xtype: 'panel',

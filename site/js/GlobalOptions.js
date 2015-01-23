@@ -1,8 +1,8 @@
 //default language code, can be overwritten with lang parameter in URL
-var lang = "en"; //for available codes see array availableLanguages in file GlobalOptions.js
+var lang = "de"; //for available codes see array availableLanguages in file GlobalOptions.js
 
 //Help file (must be a local file)
-var helpfile = "help_en.html";
+var helpfile = "help_de.html";
 
 //Servername (optional) and path and name name of QGIS Server FCGI-file
 //either with or without server-name - without servername recommended for easier porting to other servers

@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" href="css/ThemeSwitcherDataView.css" />
     <link rel="stylesheet" type="text/css" href="css/popup.css" />
     <link rel="stylesheet" type="text/css" href="css/layerOrderTab.css" />
+
+	
+	
     <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
 <!--
     <script type="text/javascript" src="libs/ext/adapter/ext/ext-base.js"></script>
@@ -69,6 +72,7 @@
 </style>
 </head>
 <body>
+
 <!-- this empty div is used for dpi-detection - do not remove it -->
 <div id="dpiDetection"></div>
 </body>

@@ -1241,6 +1241,8 @@ function postLoading() {
 			BgLayerList.appendChild(bgnode);
 		}
 	}
+	
+	
 
 	if (!initialLoadDone) {
 		if (printLayoutsDefined == true) {
