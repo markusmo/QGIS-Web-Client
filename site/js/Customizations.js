@@ -339,8 +339,13 @@ function analyzeTripButtonClicked(){
 				if(n.parentNode.childNodes.length == 1){ // it in not yet analysed
 					console.log("to be analysed");
 					console.log(n.layer.routeId);
-					
-					// TODO set up REST request to trigger Schrottis Application
+					Ext.Ajax.request({ url: ' http://schrotti12.at:5900/GI/Analyze?trackId' + "=" + n.layer.routeId,
+                                           success: function(response, opts) {
+                                           },
+                                           failure: function(response, opts) {
+                                               console.log('server-side failure with status code ' + response.status);
+                                           }
+                                        });
 				}
 			}
 		})
